@@ -1,4 +1,6 @@
 import React from "react";
+import AddTodo from "./todo/addTodo";
+import Context from "./context";
 import TodoList from "./todo/TodoList";
 
 function App() {
@@ -19,11 +21,34 @@ function App() {
     );
   }
 
+  function removeTodo(id) {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  }
+
+  function addTodo(title) {
+    setTodos(
+      todos.concat([
+        {
+          title,
+          id: Date.now(),
+          completed: false,
+        },
+      ])
+    );
+  }
+
   return (
-    <div className="wrapper">
-      <h1>React tutorial</h1>
-      <TodoList todos={todos} onToggle={toggleTodo} />
-    </div>
+    <Context.Provider value={{ removeTodo }}>
+      <div className="wrapper">
+        <h1>React tutorial</h1>
+        <AddTodo onCreate={addTodo} />
+        {todos.length ? (
+          <TodoList todos={todos} onToggle={toggleTodo} />
+        ) : (
+          <p>No ToDos</p>
+        )}
+      </div>
+    </Context.Provider>
   );
 }
 
