@@ -11,6 +11,7 @@ const styles = {
     border: "1px solid #ccc",
     borderRadius: "4px",
     marginBottom: ".5rem",
+    marginRight: ".5rem",
   },
   input: {
     marginRight: "1rem",

@@ -7,6 +7,7 @@ const styles = {
     listStyle: "none",
     margin: 0,
     padding: 0,
+    paddingBottom: "5px",
   },
 };
 

@@ -8,8 +8,9 @@ function useInputValue(defaultValue = "") {
     bind: {
       value,
       onChange: (event) => setValue(event.target.value),
-      }
-      clear: () => setValue('')
+    },
+    clear: () => setValue(""),
+    value: () => value,
   };
 }
 
@@ -18,15 +19,17 @@ function AddTodo({ onCreate }) {
 
   function submitHandler(event) {
     event.preventDefault();
-    if (input.value.trim()) {
-      onCreate(input.value);
-      //setValue("");
+    if (input.value().trim()) {
+      onCreate(input.value());
+      input.clear();
     }
   }
   return (
     <form onSubmit={submitHandler}>
-      <input {...input} />
-      <button type="submit">Add todo</button>
+      <input {...input.bind} />
+      <button type="submit" className="submit-btn">
+        Add todo
+      </button>
     </form>
   );
 }
